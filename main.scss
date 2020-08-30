@@ -1,0 +1,68 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  transition: all 0.5s;
+}
+
+body {
+  background: linear-gradient(#ddd, #666);
+  min-height: 100vh;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+h2,
+label,
+input,
+button {
+  padding: 10px 0;
+}
+
+button {
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.clean {
+  background-color: #e33;
+  color: white;
+}
+
+hr {
+  margin: 10px 0;
+}
+
+.error {
+  color: #e33;
+  font-weight: bolder;
+}
+
+ul {
+  padding: 20px;
+  width: 60%;
+  margin: 0 auto;
+  li {
+    padding: 10px 0;
+    text-align: left;
+    list-style-type: none;
+    font-size: 20px;
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    animation-fill-mode: backwards;
+    &:hover {
+      background-color: #aaa;
+    }
+    
+  }
+  
+}
+

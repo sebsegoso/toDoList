@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To do list - Vue</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <h2>Agregar Tarea</h2>
+      <label for="tarea">Tarea:</label>
+      <input
+        type="text"
+        v-model="tarea"
+        name="tarea"
+        @keyup.enter="validarVacio"
+        autofocus
+        :placeholder="placeholder"
+      />
+      <button @click="validarVacio">{{textoBoton}}</button>
+      <p v-if="tarea.trim() == ''" class="error">{{tareaVacia}}</p>
+      <hr />
+
+      <h2>Lista de tareas:</h2>
+      <span>(Cantidad de tareas: {{tareas.length}}) </span
+      ><button class="clean" @click="borrarTodo">Borrar todo</button>
+      <ul>
+        <div v-for="tarea of tareas">
+          <li>{{ tarea }}</li>
+          <hr />
+        </div>
+      </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          tareas: [],
+          tarea: "",
+          tareaVacia: "",
+          placeholder: "Ingresa una tarea aquí",
+          textoBoton: "Agregar Tarea",
+        },
+        methods: {
+          agregarTarea() {
+            this.tareas.push(this.tarea.trim());
+            this.tarea = "";
+            this.placeholder = "Ingresa otra tarea";
+            this.textoBoton = "Agregar";
+          },
+          validarVacio() {
+            if (this.tarea.trim() == "") {
+              this.tareaVacia =
+                "Debes escribir alguna tarea para poder ingresarla";
+              this.tarea = "";
+            } else {
+              this.agregarTarea();
+              this.tareaVacia = "";
+            }
+          },
+          borrarTodo() {
+            let confirmacion = confirm("Desea borrar todas las tareas?");
+            confirmacion ? (this.tareas = []) : false;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
